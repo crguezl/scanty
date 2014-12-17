@@ -20,7 +20,7 @@ the starting point for your blog, too.
 
 ## Dependencies
 
-  $ bundle install
+        $ bundle install
 
 Sequel, Maruku, and Syntax are all vendored.
 
@@ -33,7 +33,7 @@ something other than the default.
 
 Then run the server:
 
-  $ ruby main.rb
+        $ ruby main.rb
 
 And visit: http://localhost:4567
 
@@ -49,7 +49,7 @@ different port.
 The default is a SQLite file named blog.db.  To use something else, set
 DATABASE_URL in your environment when running the app, i.e.:
 
-  $ DATABASE_URL='mysql://localhost/myblog' ruby main.rb
+            $ DATABASE_URL='mysql://localhost/myblog' ruby main.rb
 
 Or, modify the Sequel.connect statement at the top of main.rb.
 

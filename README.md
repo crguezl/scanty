@@ -1,14 +1,13 @@
-= Scanty, a really small blog
+# Scanty, a really small blog
 
-== Overview
+## Overview
 
-Scanty is blogging software.  Software for my blog, to be exact:
-http://adam.blog.heroku.com
+Scanty is blogging software.  
 
 It is not a blogging engine, but it's small and easy to modify, so it could be
 the starting point for your blog, too.
 
-== Features
+## Features
 
 * Posts (shock!)
 * Tags
@@ -19,13 +18,13 @@ the starting point for your blog, too.
 * Web framework = Sinatra
 * ORM = Sequel
 
-== Dependencies
+## Dependencies
 
-  $ gem install sinatra
+  $ bundle install
 
 Sequel, Maruku, and Syntax are all vendored.
 
-== Setup
+## Setup
 
 Edit main.rb and change the Blog config struct at the top to your liking.  For
 security purposes, change the admin password and the admin cookie key and
@@ -45,7 +44,7 @@ In production, you'll probably want to run "rake start" to start (and restart)
 the server.  Change the value of "port" at the top of the Rakefile to run on a
 different port.
 
-== Database
+## Database
 
 The default is a SQLite file named blog.db.  To use something else, set
 DATABASE_URL in your environment when running the app, i.e.:
@@ -56,32 +55,32 @@ Or, modify the Sequel.connect statement at the top of main.rb.
 
 The database will be created automatically when the server is executed.
 
-== Comments
+## Comments
 
 There are no comments by default.  If you wish to activate comments, create an
 account and a website on Disqus (disqus.com) and enter the website shortname as
 the :disqus_shortname value in the Blog config struct.
 
-== Import data
+## Import data
 
 Christopher Swenson has a Wordpress importer: http://github.com/swenson/scanty_wordpress_import
 
 Other kinds of data can be imported easily, take a look at the rake task :import for an example of loading from a YAML file with field names that match the database schema.
 
-== Customize
+## Customize
 
 There are no themes or settings beyond the basic ones in the Blog struct.  Just
 edit the CSS or the code as you see fit.
 
-== Meta
+## Meta
 
-Written by Adam Wiggins
+Written by Adam Wiggins. Forked to be used for teaching by Casiano Rodríguez León
 
 Patches contributed by: Christopher Swenson, S. Brent Faulkner, and Stephen Eley
 
 Released under the MIT License: http://www.opensource.org/licenses/mit-license.php
 
-http://github.com/adamwiggins/scanty
+Forked from http://github.com/adamwiggins/scanty
 
-http://adam.blog.heroku.com
+http://about.adamwiggins.com/
 

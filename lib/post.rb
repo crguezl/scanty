@@ -6,6 +6,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
 require 'syntax'
 
 class Post < Sequel::Model
+  plugin :schema
 	unless table_exists?
 		set_schema do
 			primary_key :id

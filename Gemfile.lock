@@ -23,6 +23,10 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     sequel (4.17.0)
+    sequel_core (3.8.0)
+      sequel (>= 3.8.0)
+    sequel_model (3.8.0)
+      sequel (>= 3.8.0)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -45,6 +49,8 @@ DEPENDENCIES
   dm-sqlite-adapter
   maruku
   sequel
+  sequel_core
+  sequel_model
   sinatra
   sinatra-contrib
   sqlite3

@@ -1,7 +1,9 @@
-require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
+#require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
+require 'maruku'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
-require 'syntax/convertors/html'
+#require 'syntax/convertors/html'
+require 'syntax'
 
 class Post < Sequel::Model
 	unless table_exists?

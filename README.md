@@ -26,46 +26,50 @@ Sequel, Maruku, and Syntax are all vendored.
 
 ## Setup
 
-Edit main.rb and change the Blog config struct at the top to your liking.  For
+Edit `main.rb` and change the Blog config struct at the top to your liking.  For
 security purposes, change the admin password and the admin cookie key and
 value.  These last two can be set to any random value you like, just choose
 something other than the default.
+
+In your `/etc/hosts` file add a line like this one:
+
+    127.0.0.1   localhost www.example.com
 
 Then run the server:
 
         $ ruby main.rb
 
-And visit: http://localhost:4567
+And visit: `http://www.example.com:4567`
 
-Log in with the password you selected, then click New Post.  The rest should be
+Log in with the password you selected, then click `New Post`.  The rest should be
 self-explanatory.
 
-In production, you'll probably want to run "rake start" to start (and restart)
-the server.  Change the value of "port" at the top of the Rakefile to run on a
+In production, you'll probably want to run `rake start` to start (and restart)
+the server.  Change the value of `port` at the top of the `Rakefile` to run on a
 different port.
 
 ## Database
 
-The default is a SQLite file named blog.db.  To use something else, set
+The default is a SQLite file named `blog.db`.  To use something else, set
 DATABASE_URL in your environment when running the app, i.e.:
 
             $ DATABASE_URL='mysql://localhost/myblog' ruby main.rb
 
-Or, modify the Sequel.connect statement at the top of main.rb.
+Or, modify the `Sequel.connect` statement at the top of `main.rb`.
 
 The database will be created automatically when the server is executed.
 
 ## Comments
 
 There are no comments by default.  If you wish to activate comments, create an
-account and a website on Disqus (disqus.com) and enter the website shortname as
-the :disqus_shortname value in the Blog config struct.
+account and a website on [Disqus](disqus.com) and enter the website shortname as
+the `:disqus_shortname` value in the Blog config struct.
 
 ## Import data
 
 Christopher Swenson has a Wordpress importer: http://github.com/swenson/scanty_wordpress_import
 
-Other kinds of data can be imported easily, take a look at the rake task :import for an example of loading from a YAML file with field names that match the database schema.
+Other kinds of data can be imported easily, take a look at the rake task `:import` for an example of loading from a YAML file with field names that match the database schema.
 
 ## Customize
 

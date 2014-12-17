@@ -2,6 +2,7 @@ $: <<  '.' << './lib'
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/contrib'
+require 'sinatra/reloader' if development?
 
 #$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
 require 'sequel'
@@ -46,6 +47,7 @@ layout 'layout'
 ### Public
 
 get '/' do
+  p "admin = #{admin?}"
 	posts = Post.reverse_order(:created_at).limit(10)
 	erb :index, :locals => { :posts => posts }, :layout => false
 end

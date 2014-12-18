@@ -9,3 +9,8 @@ gem 'sqlite3'
 gem 'dm-sqlite-adapter'
 gem 'maruku'
 gem 'syntax'
+group :development, :test do
+  gem 'pry'
+  gem 'rspec'
+  gem 'rspec-mocks'
+end

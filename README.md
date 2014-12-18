@@ -22,8 +22,6 @@ the starting point for your blog, too.
 
         $ bundle install
 
-Sequel, Maruku, and Syntax are all vendored.
-
 ## Setup
 
 Edit `main.rb` and change the Blog config struct at the top to your liking.  For

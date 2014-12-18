@@ -54,3 +54,7 @@ task :import => :environment do
 		DB[:posts] << post
 	end
 end
+
+task :spec do
+  sh "rspec -Ilib -Ispec spec/post_spec.rb"
+end

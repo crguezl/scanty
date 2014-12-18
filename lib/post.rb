@@ -1,9 +1,11 @@
 #require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
 require 'maruku'
+require 'pry'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
 #require 'syntax/convertors/html'
 require 'syntax'
+require 'syntax/convertors/html'
 
 class Post < Sequel::Model
   plugin :schema
@@ -59,15 +61,17 @@ class Post < Sequel::Model
 	########
 
 	def to_html(markdown)
+    #binding.pry
 		out = []
 		noncode = []
 		code_block = nil
 		markdown.split("\n").each do |line|
-			if !code_block and line.strip.downcase == '<code>'
+			if !code_block and f = line.strip.downcase =~ /<code>/
 				out << Maruku.new(noncode.join("\n")).to_html
-				noncode = []
+				noncode = [ line[0, f]]
 				code_block = []
-			elsif code_block and line.strip.downcase == '</code>'
+			elsif code_block and f = line.strip.downcase =~ %r{</code>}
+        code_block << line[0, f]
 				convertor = Syntax::Convertors::HTML.for_syntax "ruby"
 				highlighted = convertor.convert(code_block.join("\n"))
 				out << "<code>#{highlighted}</code>"

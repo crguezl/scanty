@@ -1,13 +1,17 @@
 $: <<  '.' << './lib' 
+#$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
+#$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/contrib'
 require 'sinatra/reloader' if development?
 
-#$LOAD_PATH.unshift File.dirname(__FILE__) + '/vendor/sequel'
 require 'sequel'
 
 configure do
+  set :run, false
+  #set :env, ENV['RACK_ENV']
+
 	Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://blog.db')
 
 	require 'ostruct'
@@ -29,7 +33,6 @@ error do
 	"Application error"
 end
 
-$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
 require 'post'
 
 helpers do

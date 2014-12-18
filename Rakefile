@@ -55,6 +55,7 @@ task :import => :environment do
 	end
 end
 
+desc "run tests"
 task :spec do
   sh "rspec -Ilib -Ispec spec/post_spec.rb"
 end

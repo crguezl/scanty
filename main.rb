@@ -9,7 +9,7 @@ require 'sinatra/reloader' if development?
 require 'sequel'
 
 configure do
-  set :run, false
+  #set :run, false
   #set :env, ENV['RACK_ENV']
 
 	Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://blog.db')

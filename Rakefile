@@ -29,7 +29,8 @@ end
 
 desc "Stop the app server"
 task :stop do
-	m = `netstat -lptn | grep 0.0.0.0:#{port}`.match(/LISTEN\s*(\d+)/)
+	#m = `netstat -lptn | grep 0.0.0.0:#{port}`.match(/LISTEN\s*(\d+)/)
+	m = `ps -fA | grep 'ruby *main.rb -p #{port}'`.match(/\d+\s+(\d+)/)
 	if m
 		pid = m[1].to_i
 		puts "Killing old server #{pid}"

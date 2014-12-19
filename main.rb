@@ -8,6 +8,8 @@ require 'sinatra/reloader' if development?
 
 require 'sequel'
 
+require_relative 'port'
+
 configure do
   #set :run, false
   #set :env, ENV['RACK_ENV']
@@ -18,7 +20,7 @@ configure do
 	Blog = OpenStruct.new(
 		:title => 'a scanty blog',
 		:author => 'John Doe',
-		:url_base => 'http://localhost:4567/',
+		:url_base => "http://www.example.com:#{@port}/",
 		:admin_password => 'changeme',
 		:admin_cookie_key => 'scanty_admin',
 		:admin_cookie_value => '51d6d976913ace58',

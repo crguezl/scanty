@@ -1,9 +1,9 @@
-port = 3030
+require_relative 'port'
 
 desc "Start the app server"
 task :start => :stop do
 	puts "Starting the blog"
-	system "ruby main.rb -p #{port} > access.log 2>&1 &"
+	system "ruby main.rb -p #{@port} > access.log 2>&1 &"
 end
 
 # code lifted from rush
@@ -29,8 +29,8 @@ end
 
 desc "Stop the app server"
 task :stop do
-	#m = `netstat -lptn | grep 0.0.0.0:#{port}`.match(/LISTEN\s*(\d+)/)
-	m = `ps -fA | grep 'ruby *main.rb -p #{port}'`.match(/\d+\s+(\d+)/)
+	#m = `netstat -lptn | grep 0.0.0.0:#{@port}`.match(/LISTEN\s*(\d+)/)
+	m = `ps -fA | grep 'ruby *main.rb -p #{@port}'`.match(/\d+\s+(\d+)/)
 	if m
 		pid = m[1].to_i
 		puts "Killing old server #{pid}"
@@ -59,4 +59,9 @@ end
 desc "run tests"
 task :spec do
   sh "rspec -Ilib -Ispec spec/post_spec.rb"
+end
+
+desc "open browser in the app page"
+task :open => :start do
+  sh "open http:www.example.com:#{@port}"
 end

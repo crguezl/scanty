@@ -1,11 +1,13 @@
 #require File.dirname(__FILE__) + '/../vendor/maruku/maruku'
-require 'maruku'
+#require 'maruku'
+require 'kramdown'
+require 'coderay'
 require 'pry'
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/syntax'
 #require 'syntax/convertors/html'
-require 'syntax'
-require 'syntax/convertors/html'
+#require 'syntax'
+#require 'syntax/convertors/html'
 
 class Post < Sequel::Model
   plugin :schema
@@ -62,28 +64,32 @@ class Post < Sequel::Model
 
 	def to_html(markdown)
     #binding.pry
-		out = []
-		noncode = []
-		code_block = nil
-		markdown.split("\n").each do |line|
-			if !code_block and f = line.strip.downcase =~ /<code>/
-				out << Maruku.new(noncode.join("\n")).to_html
-				noncode = [ line[0, f]]
-				code_block = []
-			elsif code_block and f = line.strip.downcase =~ %r{</code>}
-        code_block << line[0, f]
-				convertor = Syntax::Convertors::HTML.for_syntax "ruby"
-				highlighted = convertor.convert(code_block.join("\n"))
-				out << "<code>#{highlighted}</code>"
-				code_block = nil
-			elsif code_block
-				code_block << line
-			else
-				noncode << line
-			end
-		end
-		out << Maruku.new(noncode.join("\n")).to_html
-		out.join("\n")
+    Kramdown::Document.new(markdown, {
+      :syntax_highlighter => 'coderay',
+      :syntax_highlighter_opts => { :default_lang => 'ruby'}
+    }).to_html
+#		out = []
+#		noncode = []
+#		code_block = nil
+#		markdown.split("\n").each do |line|
+#			if !code_block and f = line.strip.downcase =~ /<code>/
+#				out << Maruku.new(noncode.join("\n")).to_html
+#				noncode = [ line[0, f]]
+#				code_block = []
+#			elsif code_block and f = line.strip.downcase =~ %r{</code>}
+#        code_block << line[0, f]
+#				convertor = Syntax::Convertors::HTML.for_syntax "ruby"
+#				highlighted = convertor.convert(code_block.join("\n"))
+#				out << "<code>#{highlighted}</code>"
+#				code_block = nil
+#			elsif code_block
+#				code_block << line
+#			else
+#				noncode << line
+#			end
+#		end
+#		out << Maruku.new(noncode.join("\n")).to_html
+#		out.join("\n")
 	end
 
 	def split_content(string)
